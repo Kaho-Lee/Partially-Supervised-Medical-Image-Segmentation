@@ -52,10 +52,10 @@ import UNet_MultiStructure
 test_data = '../UNetJSRT/val/IMG/'
 test_mask = '../UNetJSRT/val/mask/'
 input_size = 512
-root_path = 'UNetJSRT/'
+root_path = '../UNetJSRT/'
 
 UNet_model = UNet_CUNet.DeepModel(size_set=input_size)
-UNet_model.load_weights('./UNetJSRT/Model/UNet_Partial_FullModel_CUNet_Adam.h5')
+UNet_model.load_weights('../UNetJSRT/Model/UNet_Partial_FullModel_CUNet_Adam.h5')
 # UNet_model = UNet.DeepModel(size_set=input_size)
 # UNet_model.load_weights('./UNetJSRT/Model/UNetRLung_Adam.h5')
 if(os.path.exists(os.path.join(root_path, 'test'))):

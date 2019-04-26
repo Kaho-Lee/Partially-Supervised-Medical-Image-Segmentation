@@ -33,13 +33,13 @@ BATCH_SIZE=1
 
 EPOCHS=10
 
-test_data = 'UNetJSRT/val/IMG/'
-test_mask = 'UNetJSRT/val/mask/'
-train_data = 'UNetJSRT/train/IMG/'
-train_mask = 'UNetJSRT/train/mask/'
+test_data = '../UNetJSRT/val/IMG/'
+test_mask = '../UNetJSRT/val/mask/'
+train_data = '../UNetJSRT/train/IMG/'
+train_mask = '../UNetJSRT/train/mask/'
 
 input_size = 512
-root_path = 'UNetJSRT/'
+root_path = '../UNetJSRT/'
 
 UNet_model = UNetDropOut.DeepModel(size_set=input_size)
 UNet_model.load_weights('./UNetJSRT/Model/UNet_Partial_UNetDropOut_sig_Adam.h5')

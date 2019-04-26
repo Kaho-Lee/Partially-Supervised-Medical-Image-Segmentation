@@ -25,7 +25,7 @@ BATCH_SIZE=2
 
 EPOCHS=2
 
-result_path = mk_dir('./deep_model/')
+# result_path = mk_dir('./deep_model/')
 # pre_model_file = './deep_model/Model_MNet_REFUGE.h5'
 
 

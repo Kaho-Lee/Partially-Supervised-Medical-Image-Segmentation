@@ -34,7 +34,7 @@ BATCH_SIZE=1
 EPOCHS=80
 EPISODES = 15
 
-result_path = mk_dir('./deep_model/')
+# result_path = mk_dir('./deep_model/')
 # pre_model_file = './deep_model/Model_MNet_REFUGE.h5'
 
 
