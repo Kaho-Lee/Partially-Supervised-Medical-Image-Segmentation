@@ -32,7 +32,7 @@ KTF.set_session(sess)
 BATCH_SIZE=1
 
 EPOCHS=80
-EPISODES = 15
+EPISODES = 1
 
 # result_path = mk_dir('./deep_model/')
 # pre_model_file = './deep_model/Model_MNet_REFUGE.h5'
@@ -56,7 +56,7 @@ dice_train = np.zeros((EPOCHS,EPISODES*2))
 save_model_file =  root_path + 'Model/'+ 'UNet_Partial_FullModel_Adam.h5'
 
 for j in range(2):
-    np.random.seed(j)
+    # np.random.seed(j)
     for episode in range(EPISODES):
         print(str(episode+1)+"/"+str(EPISODES))
         Index = list(range(0,247))
@@ -257,12 +257,12 @@ acc_train  = np.mean(acc_train, axis=0)
 dice_train = np.mean(dice_train, axis=0)
 
 LossFile = open('Loss.txt', "w")
-for i in range(EPISODES*2):
+for i in range(EPOCHS):
    LossFile.writelines([str(loss_train[i]), "\n"])
 LossFile.close()
 
 AccFile = open('Accuracy.txt', "w")
-for i in range(EPISODES*2):
+for i in range(EPOCHS):
    AccFile.writelines([str(acc_train[i]), " ",str(dice_train[i]), "\n"])
 AccFile.close()
 
