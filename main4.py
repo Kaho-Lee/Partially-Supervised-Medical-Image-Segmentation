@@ -257,12 +257,12 @@ acc_train  = np.mean(acc_train, axis=0)
 dice_train = np.mean(dice_train, axis=0)
 
 LossFile = open('Loss_CUNet.txt', "w")
-for i in range(EPISODES*2):
+for i in range(EPOCHS):
    LossFile.writelines([str(loss_train[i]), "\n"])
 LossFile.close()
 
 AccFile = open('Accuracy_CUNet.txt', "w")
-for i in range(EPISODES*2):
+for i in range(EPOCHS):
    AccFile.writelines([str(acc_train[i]), " ",str(dice_train[i]), "\n"])
 AccFile.close()
 
