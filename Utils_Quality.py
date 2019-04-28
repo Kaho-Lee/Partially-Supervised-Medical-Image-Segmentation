@@ -96,8 +96,8 @@ def RMSE_Jacc(y_true, y_pred):
 def QualityEvaGenerator_Train(batch_size, ground_truth_path, pred_path, image_folder,
         mask_right_lung_folder, mask_left_lung_folder, mask_heart_folder,
         mask_left_clavicle_folder, mask_right_clavicle_folder,
-        mask_right_lung_pred, mask_left_lung_pred, mask_heart_pred,
-        mask_left_clavicle_pred, mask_right_clavicle_pred,
+        mask_right_lung_pred_folder, mask_left_lung_pred_folder, mask_heart_pred_folder,
+        mask_left_clavicle_pred_folder, mask_right_clavicle_pred_folder,
         pred_uncertainty, aug_dict,
         image_color_mode="grayscale",
         mask_color_mode="grayscale",
@@ -213,7 +213,7 @@ def QualityEvaGenerator_Train(batch_size, ground_truth_path, pred_path, image_fo
 
         mask_generator_right_lung_pred = mask_datagen_right_lung_pred.flow_from_directory(
             pred_path,
-            classes = [mask_right_lung_pred],
+            classes = [mask_right_lung_pred_folder],
             class_mode = None,
             color_mode = mask_color_mode,
             target_size = target_size,
@@ -224,7 +224,7 @@ def QualityEvaGenerator_Train(batch_size, ground_truth_path, pred_path, image_fo
 
         mask_generator_left_lung_pred = mask_datagen_right_lung_pred.flow_from_directory(
             pred_path,
-            classes = [mask_left_lung_folder_pred],
+            classes = [mask_left_lung_pred_folder],
             class_mode = None,
             color_mode = mask_color_mode,
             target_size = target_size,
@@ -235,7 +235,7 @@ def QualityEvaGenerator_Train(batch_size, ground_truth_path, pred_path, image_fo
 
         mask_generator_heart_pred = mask_datagen_heart_pred.flow_from_directory(
             pred_path,
-            classes = [mask_heart_folder_pred],
+            classes = [mask_heart_pred_folder],
             class_mode = None,
             color_mode = mask_color_mode,
             target_size = target_size,
@@ -246,7 +246,7 @@ def QualityEvaGenerator_Train(batch_size, ground_truth_path, pred_path, image_fo
 
         mask_generator_left_clavicle_pred = mask_datagen_heart_pred.flow_from_directory(
             pred_path,
-            classes = [mask_left_clavicle_folder_pred],
+            classes = [mask_left_clavicle_pred_folder],
             class_mode = None,
             color_mode = mask_color_mode,
             target_size = target_size,
@@ -257,7 +257,7 @@ def QualityEvaGenerator_Train(batch_size, ground_truth_path, pred_path, image_fo
 
         mask_generator_right_clavicle_pred = mask_datagen_heart_pred.flow_from_directory(
             pred_path,
-            classes = [mask_right_clavicle_folder_pred],
+            classes = [mask_right_clavicle_pred_folder],
             class_mode = None,
             color_mode = mask_color_mode,
             target_size = target_size,
