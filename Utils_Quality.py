@@ -121,6 +121,8 @@ def QualityEvaGenerator_Train(batch_size, ground_truth_path, pred_path, image_fo
         mask_datagen_left_clavicle  = ImageDataGenerator()
         mask_datagen_right_clavicle = ImageDataGenerator()
 
+        uncertainty_datagen = ImageDataGenerator()
+
         mask_datagen_right_lung_pred = ImageDataGenerator()
         mask_datagen_left_lung_pred = ImageDataGenerator()
         mask_datagen_heart_pred = ImageDataGenerator()
