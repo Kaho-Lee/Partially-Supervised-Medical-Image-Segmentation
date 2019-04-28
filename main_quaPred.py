@@ -45,21 +45,34 @@ UNet_model = UNetDropOut.DeepModel(size_set=input_size)
 UNet_model.load_weights('./UNetJSRT/Model/UNet_Partial_UNetDropOut_sig_Adam.h5')
 # UNet_model = UNet.DeepModel(size_set=input_size)
 # UNet_model.load_weights('./UNetJSRT/Model/UNetRLung_Adam.h5')
-if(os.path.exists(os.path.join(root_path, 'qualityPred'))):
-    shutil.rmtree(os.path.join(root_path, 'qualityPred'))
-mk_dir(root_path+'qualityPred/')
+if(os.path.exists(os.path.join(root_path, 'qualityPredVal'))):
+    shutil.rmtree(os.path.join(root_path, 'qualityPredVal'))
+mk_dir(root_path+'qualityPredVal/')
 #
 test_files = return_list(test_data, '.png')
 test_gen = test_generator(test_data, test_files, target_size=(512,512))
 results = UNet_model.predict_generator(test_gen, len(test_files), verbose=1)
 
-print(results[0].shape, results[0])
+save_result_multilabel(root_path+'qualityPredVal/', results, test_files, 6)
+maxProb(root_path+'qualityPredVal/'+'MaxUncertainty/', results, test_files)
+MCDropOut(UNet_model, root_path+'qualityPredVal/'+'MCUncertainty/', results, test_files)
+
+if(os.path.exists(os.path.join(root_path, 'qualityPredTest'))):
+    shutil.rmtree(os.path.join(root_path, 'qualityPredTest'))
+mk_dir(root_path+'qualityPredTest/')
 #
+train_files = return_list(train_data, '.png')
+train_gen = test_generator(train_data, train_files, target_size=(512,512))
+results = UNet_model.predict_generator(train_gen, len(train_files), verbose=1)
+
+save_result_multilabel(root_path+'qualityPredTest/', results, test_files, 6)
+maxProb(root_path+'qualityPredTest/'+'MaxUncertainty/', results, test_files)
+MCDropOut(UNet_model, root_path+'qualityPredTest/'+'MCUncertainty/', results, test_files)
 
 
-# save_result(root_path+'test/', results, test_files)
+BATCH_SIZE=1
 
-# save_result_multiclass(root_path+'test/', results, test_files, 3)
-save_result_multilabel(root_path+'qualityPred/', results, test_files, 6)
-maxProb(root_path+'qualityPred/'+'uncertainty/', results, test_files)
-MCDropOut(UNet_model, root_path+'qualityPred/'+'MCUncertainty/', results, test_files)
+EPOCHS=30
+EPISODES = 1
+train_path = '../UNetJSRT/qualityPredTest'
+val_path = '../UNetJSRT/qualityPredVal'

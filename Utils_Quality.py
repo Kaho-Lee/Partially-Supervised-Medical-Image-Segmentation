@@ -280,10 +280,8 @@ def QualityEvaGenerator_Train(batch_size, ground_truth_path, pred_path, image_fo
             img, mask_right_lung, mask_left_lung, mask_heart, mask_left_clavicle, mask_right_clavicle = adjust_data_multi(img, mask_right_lung, mask_left_lung, mask_heart, mask_left_clavicle, mask_right_clavicle)
             uncertainty, mask_right_lung_pred, mask_left_lung_pred, mask_heart_pred, mask_left_clavicle_pred, mask_right_clavicle_pred = adjust_data_multi(uncertainty, mask_right_lung_pred, mask_left_lung_pred, mask_heart_pred, mask_left_clavicle_pred, mask_right_clavicle_pred)
 
-            # mask_combine = np.vstack((mask_right_lung, mask_heart))
-            # print('ori shape ', mask_right_lung.shape)
-
-            # mask = np.zeros((1,target_size[0], target_size[1], 2), dtype=np.bool)
+            img = img[:,:,:,0]
+            uncertainty = uncertainty[:,:,:,0]
             mask_right_lung_pred = mask_right_lung_pred[:,:,:,0]
             mask_left_lung_pred = mask_left_lung_pred[:,:,:,0]
             mask_heart_pred = mask_heart_pred[:,:,:,0]
