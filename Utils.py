@@ -129,52 +129,6 @@ def mk_dir(dir_path):
         os.makedirs(dir_path)
     return dir_path
 
-'''
-Segmentation Uncertainty
-'''
-def maxProb(save_path, npyfile, test_files):
-    if(os.path.exists(save_path)):
-        shutil.rmtree(save_path)
-    mk_dir(save_path)
-
-    for i, item in enumerate(npyfile):
-        result_file = test_files[i]
-        filename, fileext = os.path.splitext(os.path.basename(result_file))
-        maxUncertainty = (np.max(item, axis=2) * 255.).astype(np.uint8)
-        result_file = os.path.join(save_path, "%s%s" % (filename, fileext))
-        cv2.imwrite(result_file, maxUncertainty)
-
-def MCDropOut(model, save_path, npyfile, test_files):
-    if(os.path.exists(save_path)):
-        shutil.rmtree(save_path)
-    mk_dir(save_path)
-    test_data = 'UNetJSRT/val/IMG/'
-    # test_gen = test_generator(test_data, test_files, target_size=(512,512))
-    # results = UNet_model.predict_generator(test_gen, len(test_files), verbose=1)
-
-    T = 20
-    total = npyfile
-    for i in range(T-1):
-        print('in pediction ', i+2)
-        test_gen = test_generator(test_data, test_files, target_size=(512,512))
-        results = model.predict_generator(test_gen, len(test_files), verbose=1)
-        total = np.add(total, results)
-
-    total = np.divide(total, T)
-
-    for i, item in enumerate(total):
-        result_file = test_files[i]
-        filename, fileext = os.path.splitext(os.path.basename(result_file))
-        uncertainty =  np.multiply(-1, np.multiply(item, np.log(item+0.0000001)))
-        uncertainty = np.sum(uncertainty, axis=2)
-        mcUncertainty = ((1-uncertainty) * 255.).astype(np.uint8)
-        result_file = os.path.join(save_path, "%s%s" % (filename, fileext))
-        cv2.imwrite(result_file, mcUncertainty)
-
-
-'''
-End of uncertainty measurement
-'''
 
 
 def save_result_multilabel(save_path, npyfile, test_files, numClass):
@@ -732,6 +686,7 @@ def adjust_data(img,mask):
     mask[mask <= 0.5] = 0
 
     return (img, mask)
+
 
 def adjust_data_multi(img,mask1, mask2, mask3, mask4, mask5):
     img = img / 255

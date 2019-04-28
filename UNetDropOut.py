@@ -7,7 +7,7 @@ from keras.layers import  BatchNormalization, Activation, average
 
 def DeepModel(size_set = 256):
 
-    img_input = Input(shape=(size_set, size_set, 1))
+    img_input = Input(shape=(size_set, size_set, 8))
 
     # scale_img_2 = AveragePooling2D(pool_size=(2, 2))(img_input)
     # scale_img_3 = AveragePooling2D(pool_size=(2, 2))(scale_img_2)
