@@ -412,7 +412,7 @@ def train_generator_multiStruct(batch_size, train_path, image_folder,
         save_prefix  = mask_save_prefix,
         seed = seed)
 
-    mask_generator_left_lung = mask_datagen_right_lung.flow_from_directory(
+    mask_generator_left_lung = mask_datagen_left_lung.flow_from_directory(
         train_path,
         classes = [mask_left_lung_folder],
         class_mode = None,
@@ -434,7 +434,7 @@ def train_generator_multiStruct(batch_size, train_path, image_folder,
         save_prefix  = mask_save_prefix,
         seed = seed)
 
-    mask_generator_left_clavicle = mask_datagen_heart.flow_from_directory(
+    mask_generator_left_clavicle = mask_datagen_left_clavicle.flow_from_directory(
         train_path,
         classes = [mask_left_clavicle_folder],
         class_mode = None,
@@ -445,7 +445,7 @@ def train_generator_multiStruct(batch_size, train_path, image_folder,
         save_prefix  = mask_save_prefix,
         seed = seed)
 
-    mask_generator_right_clavicle = mask_datagen_heart.flow_from_directory(
+    mask_generator_right_clavicle = mask_datagen_right_clavicle.flow_from_directory(
         train_path,
         classes = [mask_right_clavicle_folder],
         class_mode = None,
@@ -578,7 +578,7 @@ def val_generator_multiStruct(batch_size, train_path, image_folder,
         save_prefix  = mask_save_prefix,
         seed = seed)
 
-    mask_generator_left_lung = mask_datagen_right_lung.flow_from_directory(
+    mask_generator_left_lung = mask_datagen_left_lung.flow_from_directory(
         train_path,
         classes = [mask_left_lung_folder],
         class_mode = None,
@@ -600,7 +600,7 @@ def val_generator_multiStruct(batch_size, train_path, image_folder,
         save_prefix  = mask_save_prefix,
         seed = seed)
 
-    mask_generator_left_clavicle = mask_datagen_heart.flow_from_directory(
+    mask_generator_left_clavicle = mask_datagen_left_clavicle.flow_from_directory(
         train_path,
         classes = [mask_left_clavicle_folder],
         class_mode = None,
@@ -611,7 +611,7 @@ def val_generator_multiStruct(batch_size, train_path, image_folder,
         save_prefix  = mask_save_prefix,
         seed = seed)
 
-    mask_generator_right_clavicle = mask_datagen_heart.flow_from_directory(
+    mask_generator_right_clavicle = mask_datagen_right_clavicle.flow_from_directory(
         train_path,
         classes = [mask_right_clavicle_folder],
         class_mode = None,
