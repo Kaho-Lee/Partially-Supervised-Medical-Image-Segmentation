@@ -1,4 +1,6 @@
-#
+'''
+Lung CT image preprocessing 
+'''
 import numpy as np
 import scipy.io as sio
 # from keras.preprocessing import image
@@ -18,14 +20,8 @@ shape_mask = (1024,1024)
 new_shape = (512,512)
 dtype = np.dtype('>u2')
 
-# disc_list = [400, 500, 600, 700, 800]
-# DiscROI_size = 800
-# DiscSeg_size =
-# CDRSeg_size = 400
-
 data_type = '.gif'
 target_type = '.png'
-# data_img_path = '../data/REFUGE-Training400/Training400/Glaucoma/'
 data_img_path = 'JSRT/All247/'
 label_img_path = 'JSRT/scratch/All247imagesMask/'
 DilateKernel = np.ones((15, 15), np.uint8)
@@ -45,9 +41,6 @@ for lineIdx in range(len(file_test_list)):
     image = cv2.resize(image, new_shape)
     cv2.imwrite(data_save_path+temp_txt, image)
 
-
-# DiscSeg_model = UNet.DeepModel(size_set=DiscSeg_size)
-# DiscSeg_model.load_weights('./deep_model/Model_DiscSeg_ORIGA.h5')
 for item in structure_list:
     structure_path = os.path.join(label_img_path, item)
     print(structure_path)
@@ -89,17 +82,12 @@ for item in structure_list:
 
 
 
+    # load image
+    # org_img = np.asarray(image.load_img(data_img_path + temp_txt))
 
 
-
-
-
-        # load image
-        # org_img = np.asarray(image.load_img(data_img_path + temp_txt))
-
-
-        # load label
-        # org_label = np.asarray(image.load_img(label_img_path + temp_txt[:-4] + '.bmp'))[:,:,0]
-        # new_label = np.zeros(np.shape(org_label) + (3,), dtype=np.uint8)
-        # new_label[org_label < 200, 0] = 255
-        # new_label[org_label < 100, 1] = 255
+    # load label
+    # org_label = np.asarray(image.load_img(label_img_path + temp_txt[:-4] + '.bmp'))[:,:,0]
+    # new_label = np.zeros(np.shape(org_label) + (3,), dtype=np.uint8)
+    # new_label[org_label < 200, 0] = 255
+    # new_label[org_label < 100, 1] = 255

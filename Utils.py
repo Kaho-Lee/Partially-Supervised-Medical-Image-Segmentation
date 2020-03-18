@@ -1,5 +1,5 @@
 """
-    Taken from https://www.kaggle.com/eduardomineo/u-net-lung-segmentation-montgomery-shenzhen/data on 0309,2019
+Some of utils code referred from https://www.kaggle.com/eduardomineo/u-net-lung-segmentation-montgomery-shenzhen/data on 0309,2019
 """
 from __future__ import print_function
 import os

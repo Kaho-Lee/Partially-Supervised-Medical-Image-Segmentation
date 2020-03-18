@@ -176,8 +176,3 @@ for i in range(len(epoch_count)):
     AccFile.writelines([training_accuracy[i], validation_accuracy[i]])
 AccFile.close()
 
-# print('index', Index)
-# print('\n')
-# print('val',valIndex)
-# print('\n')
-# print('test', testIndex)
