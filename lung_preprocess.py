@@ -4,11 +4,10 @@ import scipy.io as sio
 # from keras.preprocessing import image
 from skimage.transform import rotate, resize
 from skimage.measure import label, regionprops
-from mnet_utils import BW_img, disc_crop, mk_dir, return_list
 from PIL import Image
 import matplotlib.pyplot as plt
 import cv2
-
+from Uttils import *
 import UNet as UNet
 import os
 import Model_DiscSeg as DiscModel

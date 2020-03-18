@@ -713,3 +713,26 @@ def adjust_data_multi(img,mask1, mask2, mask3, mask4, mask5):
 
 
     return (img, mask1, mask2, mask3, mask4, mask5)
+
+
+
+
+def return_list(data_path, data_type):
+    file_list = [file for file in os.listdir(data_path) if file.lower().endswith(data_type)]
+    # for file in os.listdir(data_path):
+    #     print(file)
+    print(str(len(file_list)))
+    return file_list
+
+def train_loader(data_list, data_path, mask_path, input_size):
+    while 1:
+        for lineIdx in range(len(data_list)):
+            temp_txt = data_list[lineIdx]
+
+            train_img = np.asarray(image.load_img(data_path + temp_txt, target_size=(input_size, input_size, 1))).astype('float32')
+            print('size is ', train_img.shape)
+            img_mask = np.asarray(image.load_img(mask_path + temp_txt, target_size=(input_size, input_size, 1)))/255.0
+
+            train_img = np.reshape(train_img, (1,) + train_img.shape)
+            img_mask = np.reshape(img_mask, (1,) + img_mask.shape)
+            yield (train_img, img_mask)

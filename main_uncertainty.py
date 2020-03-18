@@ -4,7 +4,6 @@ import numpy as np
 import cv2
 import matplotlib.pyplot as plt
 from Utils import *
-from mnet_utils import BW_img, disc_crop, mk_dir, return_list
 import UNet
 import UNet_CUNet
 import shutil

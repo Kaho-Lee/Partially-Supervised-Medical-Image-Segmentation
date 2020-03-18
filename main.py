@@ -1,3 +1,7 @@
+'''
+Sample code for the main file of model training
+'''
+
 import random
 from keras.optimizers import SGD
 from keras.models import *
@@ -7,7 +11,6 @@ from keras import backend as keras
 from keras.preprocessing.image import ImageDataGenerator
 from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 
-from mnet_utils import mk_dir, return_list, train_loader
 import UNet
 from Utils import train_generator, test_load_image, dice_coef_loss, dice_coef, train_generator, val_generator
 

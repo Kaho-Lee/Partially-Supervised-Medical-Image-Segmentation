@@ -9,7 +9,6 @@ from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 import keras.backend.tensorflow_backend as KTF
 import tensorflow as tf
 
-from mnet_utils import mk_dir, return_list, train_loader
 import UNet_CUNet
 from Utils import *
 

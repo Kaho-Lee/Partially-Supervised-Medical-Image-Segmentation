@@ -9,7 +9,6 @@ from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 import keras.backend.tensorflow_backend as KTF
 import tensorflow as tf
 
-from mnet_utils import mk_dir, return_list, train_loader
 import UNet_MultiStructure
 from Utils import *
 
@@ -142,22 +141,6 @@ for j in range(2):
             image = cv2.imread(mask_path_right_clavicle+item)
             cv2.imwrite(root_path+'val/'+'right_clavicle/'+item, image)
 
-        # val_img = cv2.imread(root_path+'val/'+'IMG/'+return_list(root_path+'val/IMG/', '.png')[0])
-        # val_mask_lung = cv2.imread(root_path+'val/'+'right_lung/'+return_list(root_path+'val/'+'right_lung/', '.png')[0])
-        # val_mask_heart = cv2.imread(root_path+'val/'+'heart/'+return_list(root_path+'val/'+'heart/', '.png')[0])
-        # val_img, val_mask_lung, val_mask_heart = adjust_data_multi(val_img, val_mask_lung, val_mask_heart)
-        # back_lung = np.zeros(val_mask_lung.shape)
-        # back_lung[val_mask_lung==0] = 1
-        # back_heart = np.zeros(val_mask_heart.shape)
-        # back_heart[val_mask_heart==0] = 1
-        # back = np.multiply(back_lung, back_heart)
-        # fig, axs = plt.subplots(1, 3, figsize=(15, 8))
-        # axs[0].imshow(val_mask_lung)
-        # axs[1].imshow(val_mask_heart)
-        # axs[2].imshow(back)
-        # plt.show()
-        # a=b
-
 
 
         input_size = 512
@@ -169,10 +152,8 @@ for j in range(2):
         Optimizer_Adam = Adam(lr=5e-5)
 
         UNetModel = UNet_MultiStructure.DeepModel(size_set=input_size)
-        #UNetModel.compile(optimizer=Optimizer_Adam, loss='binary_crossentropy', metrics=[dice_coef, 'accuracy'])
 
         UNetModel.compile(optimizer=Optimizer_Adam, loss=dice_coef_loss_partial_annotated, metrics=[dice_coef, 'accuracy'])
-        #UNetModel.compile(optimizer=Optimizer_Adam, loss=binary_crossentropy_jiahao, metrics=[dice_coef, 'accuracy'])
         UNetModel.summary()
 
         train_generator_args = dict(rotation_range=0.2,
