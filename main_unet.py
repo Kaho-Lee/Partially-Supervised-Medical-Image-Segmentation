@@ -9,7 +9,7 @@ from keras.callbacks import ModelCheckpoint, LearningRateScheduler
 import keras.backend.tensorflow_backend as KTF
 import tensorflow as tf
 
-import UNet_MultiStructure
+import UNet_DropOut
 from Utils import *
 
 import numpy as np
@@ -33,8 +33,6 @@ BATCH_SIZE=1
 EPOCHS=80
 EPISODES = 1
 
-# result_path = mk_dir('./deep_model/')
-# pre_model_file = './deep_model/Model_MNet_REFUGE.h5'
 
 
 root_path = '../UNetJSRT/'
@@ -200,14 +198,6 @@ for j in range(2):
                                       validation_data = val_gen,
                                       validation_steps=len(val_list))
 
-        # history = UNetModel.fit_generator(
-        #     generator=train_loader(train_list, root_path+'train/'+'IMG/', root_path+'train/'+'mask/', input_size),
-        #     steps_per_epoch=len(train_list),
-        #     validation_data=train_loader(val_list, root_path+'val/'+'IMG/', root_path+'val/'+'mask/', input_size),
-        #     validation_steps=len(train_list),
-        #     verbose=0,
-        #     epochs=EPOCHS
-        # )
         UNetModel.save(save_model_file)
 
 

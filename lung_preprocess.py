@@ -4,15 +4,15 @@ Lung CT image preprocessing
 import numpy as np
 import scipy.io as sio
 # from keras.preprocessing import image
-from skimage.transform import rotate, resize
-from skimage.measure import label, regionprops
+# from skimage.transform import rotate, resize
+# from skimage.measure import label, regionprops
 from PIL import Image
 import matplotlib.pyplot as plt
 import cv2
-from Uttils import *
-import UNet as UNet
+from Utils import *
+
 import os
-import Model_DiscSeg as DiscModel
+
 
 structure_list = ['heart/', 'right_lung/', 'left_lung/', 'right_clavicle/', 'left_clavicle/']
 shape_in = (2048, 2048) # matrix size
@@ -22,15 +22,13 @@ dtype = np.dtype('>u2')
 
 data_type = '.gif'
 target_type = '.png'
-data_img_path = 'JSRT/All247/'
-label_img_path = 'JSRT/scratch/All247imagesMask/'
+data_img_path = '../JSRT/All247/'
+label_img_path = '../JSRT/scratch/All247imagesMask/'
 DilateKernel = np.ones((15, 15), np.uint8)
 
-# data_save_path = mk_dir('../training_crop/data/')
-# label_save_path = mk_dir('../training_crop/label/')
-data_save_path = mk_dir('UNetJSRT/data/')
-label_save_path = mk_dir('UNetJSRT/label/')
-dilate_save_path = mk_dir('UNetJSRT/dilate/')
+data_save_path = mk_dir('../UNetJSRT/data/')
+label_save_path = mk_dir('../UNetJSRT/label/')
+dilate_save_path = mk_dir('../UNetJSRT/dilate/')
 
 
 file_test_list = return_list(data_img_path, target_type)
@@ -51,10 +49,26 @@ for item in structure_list:
     if(not os.path.exists(os.path.join(dilate_save_path, item))):
         mk_dir(dilate_save_path+item)
 
+
+    """
+       converting .gif to .png
+    """
+    file_test_list = return_list(structure_path, data_type)
+    for lineIdx in range(len(file_test_list)):
+    
+        temp_txt = file_test_list[lineIdx]
+        temp_name = temp_txt[:-4]
+        print(' Processing Img ' + str(lineIdx + 1) + ': ' + temp_txt + ' ' +temp_name)
+    
+        im = Image.open(structure_path+temp_txt)
+        bg = Image.new("L", im.size)
+        bg.paste(im, (0,0), im)
+        bg.save(structure_path+temp_name+target_type, quality=95)
+
+
     """
        preprocessing data label
     """
-
     file_test_list = return_list(structure_path, target_type)
     for lineIdx in range((len(file_test_list))):
         temp_txt = file_test_list[lineIdx]
@@ -65,21 +79,7 @@ for item in structure_list:
         mask_dilate = cv2.dilate(mask, DilateKernel, iterations=1)
         cv2.imwrite(dilate_save_path+item+temp_txt, mask_dilate)
 
-    """
-       converting .gif to .png
-    """
-    # for lineIdx in range(len(file_test_list)):
-    #
-    #     temp_txt = file_test_list[lineIdx]
-    #     temp_name = temp_txt[:-4]
-    #     print(' Processing Img ' + str(lineIdx + 1) + ': ' + temp_txt + ' ' +temp_name)
-    #
-    #     im = Image.open(structure_path+temp_txt)
-    #     bg = Image.new("L", im.size)
-    #     bg.paste(im, (0,0), im)
-    #     bg.save(structure_path+temp_name+target_type, quality=95)
-
-
+    
 
 
     # load image
